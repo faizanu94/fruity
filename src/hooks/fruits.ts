@@ -1,7 +1,8 @@
 import useSWR from 'swr';
 import { Fruit } from '../types';
 
-const FRUITS_API_URL = '/api';
+const FRUITS_API_URL =
+  process.env.NODE_ENV === 'production' ? '/api/fruits' : '/api';
 
 const fetcher = (url: string): Promise<Fruit[]> =>
   fetch(url).then((res) => {
