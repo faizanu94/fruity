@@ -16,7 +16,7 @@ const cardStyle: React.CSSProperties = {
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
   backgroundColor: '#f9f9f9',
   width: '100%',
-  maxWidth: '600px',
+  maxWidth: '700px',
 };
 
 const buttonStyle: React.CSSProperties = {
@@ -80,6 +80,27 @@ const chartWrapperStyle: React.CSSProperties = {
   marginTop: '20px',
 };
 
+const tableStyles = {
+  container: {
+    width: '100%',
+    overflowX: 'auto' as const,
+  },
+  table: {
+    width: '100%',
+    minWidth: '650px',
+    borderCollapse: 'collapse' as const,
+  },
+  th: {
+    padding: '12px 8px',
+    textAlign: 'left' as const,
+    borderBottom: '2px solid #e0e0e0',
+  },
+  td: {
+    padding: '8px',
+    borderBottom: '1px solid #e0e0e0',
+  },
+};
+
 export {
   containerStyle,
   cardStyle,
@@ -90,4 +111,5 @@ export {
   fruitListItemStyle,
   totalCaloriesStyle,
   chartWrapperStyle,
+  tableStyles,
 };
