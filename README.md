@@ -4,7 +4,7 @@ Fruity allows users to browse a list of fruits, grouped by various categories an
 
 ## Technologies
 
-- React: Frontend library for building the UI
+- React: Library for building the UI
 - TypeScript: For type safety and better developer experience
 - Zustand: Manages global state efficiently
 - SWR: Handles data fetching and caching
@@ -13,7 +13,7 @@ Fruity allows users to browse a list of fruits, grouped by various categories an
 
 ```plaintext
 /src
-  ├── /components              # app components
+  ├── /components              # add components
   ├── /hooks                   # Custom hooks for data fetching
   ├── /store                   # Zustand store for state management
   ├── /styles                  # Shared styles

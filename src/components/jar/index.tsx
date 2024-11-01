@@ -1,6 +1,11 @@
 import React from 'react';
-import { listItemStyle, headerStyle } from '../../styles';
 import { useJarStore } from '../../store';
+import {
+  headerStyle,
+  jarContainerStyle,
+  fruitListItemStyle,
+  totalCaloriesStyle,
+} from '../../styles';
 
 export const Jar: React.FC = () => {
   const fruitsInJar = useJarStore((state) => state.fruitsInJar);
@@ -10,18 +15,17 @@ export const Jar: React.FC = () => {
   );
 
   return (
-    <div>
-      <h2 style={headerStyle}>Jar</h2>
-      <ul>
+    <div style={jarContainerStyle}>
+      <h2 style={{ ...headerStyle, color: '#e65100' }}>My Fruit Jar</h2>
+      <ul style={{ padding: 0, listStyleType: 'none' }}>
         {fruitsInJar.map((fruit, index) => (
-          <li key={index} style={listItemStyle}>
-            {fruit.name} ({fruit.nutritions.calories} cal)
+          <li key={index} style={fruitListItemStyle}>
+            <span>{fruit.name}</span>
+            <span>{fruit.nutritions.calories} cal</span>
           </li>
         ))}
       </ul>
-      <p style={{ fontWeight: 'bold', fontSize: '18px', marginTop: '16px' }}>
-        Total Calories: {totalCalories}
-      </p>
+      <p style={totalCaloriesStyle}>Total Calories: {totalCalories}</p>
     </div>
   );
 };
