@@ -16,31 +16,42 @@ Fruity is a simple app that lets users browse a list of fruits, add selected fru
 - Zustand: Manages global state efficiently
 - SWR: Handles data fetching and caching
 - Recharts: Data visualization
-- http-proxy-middleware: Bypasses CORS restrictions in development and production
+- http-proxy-middleware: CORS handling in development
+- node-fetch: Fetching data from external API in serverless functions
 
-## CORS Handling with http-proxy-middleware
+## CORS Handling
 
-To manage CORS, http-proxy-middleware is used in both development and production:
+The application uses different strategies for handling CORS issues in development and production environments
 
-- Development: The setupProxy.js file in src/ directs /api requests to the external API and bypasses CORS issues when running locally
-- Production: An Express server (server.js) serves the React production build and proxies /api requests to the external API
+### Development
+
+- setupProxy.js is used to proxy API requests to bypass CORS. This file is located in src/ and uses http-proxy-middleware to forward requests from /api to the external API
+
+### Production
+
+- Vercel serverless functions are used to handle CORS by acting as a proxy between the React frontend and the external API
+- The api/fruits.mjs serverless function fetches data from the external API using node-fetch, sets appropriate CORS headers and returns the response to the client
+- Vercel automatically hosts this function at /api/fruits, allowing to call it directly from frontend
 
 ## Project Structure
 
 ```plaintext
-/src
-  ├── /components              # app components
-  ├── /hooks                   # Custom hook for data fetching
-  ├── /store                   # Zustand store for state management
-  ├── /styles                  # Shared styles
-  ├── App.tsx                  # Main app component
-  ├── index.tsx                # Entry point
-  └── types.d.ts               # TypeScript types
+/fruity
+  ├── /public                # Public assets
+  ├── /src
+  │   ├── /components        # Reusable UI components
+  │   ├── /hooks             # Custom hooks
+  │   ├── /store             # Global state
+  │   ├── /styles            # Shared styles
+  │   ├── setupProxy.js      # Proxy setup for CORS in development
+  │   ├── App.tsx            # Main app component
+  │   └── index.tsx          # Entry point
+  ├── /api                   # Serverless functions folder
+  │   └── fruits.mjs         # Serverless function for API requests
+  ├── /build                 # Production build files (after running `npm run build`)
+  ├── package.json
+  └── ...
 ```
-
-## Deployment
-
-Live at https://fruity-roan.vercel.app
 
 ## Getting Started
 
@@ -55,7 +66,7 @@ npm install
 2. Start the development server:
 
 ```bash
-npm run dev
+npm start
 ```
 
 3. Access the app at http://localhost:3000. In development, requests to /api are proxied via setupProxy.js to handle CORS
@@ -68,14 +79,14 @@ npm run dev
 npm run build
 ```
 
-2. Start the Express server:
+2. Deploy to Vercel
 
-```bash
-npm start
-```
+Vercel will automatically use /api/fruits to route requests to the fruits.mjs serverless function, which handles CORS by fetching data from the external API and returning it to the app.
 
-3. The app will be served on http://localhost:5000 with API requests proxied via server.js to the external API to handle CORS
+## Deployment
+
+- Automated Deployment: Vercel is configured to automatically trigger a deployment workflow upon every merge to the master branch
 
 ## Additional Notes
 
-- API Calls: Use /api as the base URL for API calls to ensure compatibility across development and production environments
+- API Calls: Use /api as the base URL in development, and /api/fruits as the endpoint in production
