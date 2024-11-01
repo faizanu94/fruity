@@ -33,13 +33,20 @@ export const FruitList: React.FC = () => {
     }));
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error loading data</p>;
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error loading data</p>;
+  }
 
   const groupedFruits = fruits?.reduce<Record<string, Fruit[]>>(
     (acc, fruit) => {
-      const key = groupBy === 'none' ? 'all' : fruit[groupBy];
-      if (!acc[key]) acc[key] = [];
+      const key = groupBy === 'none' ? 'all' : fruit[groupBy].trim();
+      if (!acc[key]) {
+        acc[key] = [];
+      }
       acc[key].push(fruit);
       return acc;
     },
