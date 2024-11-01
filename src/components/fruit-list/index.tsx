@@ -11,7 +11,7 @@ const viewRenderers = {
 };
 
 export const FruitList: React.FC = () => {
-  const { fruits, isLoading, isError } = useFruits();
+  const { fruits, isLoading, isError, mutate } = useFruits();
   const [groupBy, setGroupBy] = useState<'none' | 'family' | 'order' | 'genus'>(
     'none'
   );
@@ -34,11 +34,49 @@ export const FruitList: React.FC = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div style={{ textAlign: 'center', padding: '2rem' }}>
+        <div style={{ marginBottom: '1rem' }}>Loading fruits...</div>
+        <div
+          style={{
+            width: '50px',
+            height: '50px',
+            border: '5px solid #f3f3f3',
+            borderTop: '5px solid forestgreen',
+            borderRadius: '50%',
+            margin: '0 auto',
+            animation: 'spin 1s linear infinite',
+          }}
+        />
+        <style>
+          {`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}
+        </style>
+      </div>
+    );
   }
 
   if (isError) {
-    return <p>Error loading data</p>;
+    return (
+      <div style={{ textAlign: 'center', padding: '2rem' }}>
+        <p style={{ color: '#d32f2f', marginBottom: '1rem' }}>
+          Error loading fruits
+        </p>
+        <button
+          onClick={() => mutate()}
+          style={{
+            ...buttonStyle,
+            backgroundColor: '#d32f2f',
+          }}
+        >
+          Try Again
+        </button>
+      </div>
+    );
   }
 
   const groupedFruits = fruits?.reduce<Record<string, Fruit[]>>(

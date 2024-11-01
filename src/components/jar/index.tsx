@@ -1,10 +1,12 @@
 import React from 'react';
 import { useJarStore } from '../../store';
+import { Chart } from './chart';
 import {
   headerStyle,
   jarContainerStyle,
   fruitListItemStyle,
   totalCaloriesStyle,
+  chartWrapperStyle,
 } from '../../styles';
 
 export const Jar: React.FC = () => {
@@ -26,6 +28,9 @@ export const Jar: React.FC = () => {
         ))}
       </ul>
       <p style={totalCaloriesStyle}>Total Calories: {totalCalories}</p>
+      <div style={chartWrapperStyle}>
+        <Chart fruits={fruitsInJar} />
+      </div>
     </div>
   );
 };

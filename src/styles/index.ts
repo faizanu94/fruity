@@ -74,6 +74,12 @@ const totalCaloriesStyle: React.CSSProperties = {
   textAlign: 'center',
 };
 
+const chartWrapperStyle: React.CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '20px',
+};
+
 export {
   containerStyle,
   cardStyle,
@@ -83,4 +89,5 @@ export {
   jarContainerStyle,
   fruitListItemStyle,
   totalCaloriesStyle,
+  chartWrapperStyle,
 };
