@@ -1,8 +1,7 @@
 import useSWR from 'swr';
 import { Fruit } from '../types';
 
-const FRUITS_API_URL =
-  'https://wcz3qr33kmjvzotdqt65efniv40kokon.lambda-url.us-east-2.on.aws/';
+const FRUITS_API_URL = '/api';
 
 const fetcher = (url: string): Promise<Fruit[]> =>
   fetch(url).then((res) => {
