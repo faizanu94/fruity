@@ -21,6 +21,7 @@ export const FruitList: React.FC = () => {
   }>({});
 
   const addFruit = useJarStore((state) => state.addFruit);
+  const addAllFruits = useJarStore((state) => state.addAllFruits);
 
   const handleToggleView = useCallback(() => {
     setView((prevView) => (prevView === 'list' ? 'table' : 'list'));
@@ -118,7 +119,8 @@ export const FruitList: React.FC = () => {
                 {key} {collapsedGroups[key] ? '▲' : '▼'}
               </h3>
             )}
-            {!collapsedGroups[key] && viewRenderers[view](fruits, addFruit)}
+            {!collapsedGroups[key] &&
+              viewRenderers[view](fruits, addFruit, addAllFruits)}
           </div>
         ))}
     </div>

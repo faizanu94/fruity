@@ -12,7 +12,7 @@ import {
 export const Jar: React.FC = () => {
   const fruitsInJar = useJarStore((state) => state.fruitsInJar);
   const totalCalories = fruitsInJar.reduce(
-    (acc, fruit) => acc + fruit.nutritions.calories,
+    (acc, fruit) => acc + fruit.fruit.nutritions.calories,
     0
   );
 
@@ -22,14 +22,14 @@ export const Jar: React.FC = () => {
       <ul style={{ padding: 0, listStyleType: 'none' }}>
         {fruitsInJar.map((fruit, index) => (
           <li key={index} style={fruitListItemStyle}>
-            <span>{fruit.name}</span>
-            <span>{fruit.nutritions.calories} cal</span>
+            <span>{fruit.fruit.name}</span>
+            <span>{fruit.fruit.nutritions.calories} cal</span>
           </li>
         ))}
       </ul>
       <p style={totalCaloriesStyle}>Total Calories: {totalCalories}</p>
       <div style={chartWrapperStyle}>
-        <Chart fruits={fruitsInJar} />
+        <Chart fruits={fruitsInJar.map((f) => f.fruit)} />
       </div>
     </div>
   );

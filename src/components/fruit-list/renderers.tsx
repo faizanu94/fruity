@@ -1,8 +1,18 @@
 import { Fruit } from '../../types';
 import { buttonStyle, listItemStyle, tableStyles } from '../../styles';
 
-const renderListView = (fruits: Fruit[], addFruit: (fruit: Fruit) => void) => (
+const renderListView = (
+  fruits: Fruit[],
+  addFruit: (fruit: Fruit) => void,
+  addAllFruits: (fruits: Fruit[]) => void
+) => (
   <div>
+    <button
+      onClick={() => addAllFruits(fruits)}
+      style={{ ...buttonStyle, marginBottom: '16px', width: '100%' }}
+    >
+      Add All Fruits
+    </button>
     {fruits.map((fruit) => (
       <div key={fruit.name} style={listItemStyle}>
         {fruit.name} ({fruit.nutritions.calories} cal)
@@ -14,8 +24,18 @@ const renderListView = (fruits: Fruit[], addFruit: (fruit: Fruit) => void) => (
   </div>
 );
 
-const renderTableView = (fruits: Fruit[], addFruit: (fruit: Fruit) => void) => (
+const renderTableView = (
+  fruits: Fruit[],
+  addFruit: (fruit: Fruit) => void,
+  addAllFruits: (fruits: Fruit[]) => void
+) => (
   <div style={tableStyles.container}>
+    <button
+      onClick={() => addAllFruits(fruits)}
+      style={{ ...buttonStyle, marginBottom: '16px', width: '100%' }}
+    >
+      Add All Fruits
+    </button>
     <table style={tableStyles.table}>
       <thead>
         <tr>
@@ -46,5 +66,4 @@ const renderTableView = (fruits: Fruit[], addFruit: (fruit: Fruit) => void) => (
     </table>
   </div>
 );
-
 export { renderListView, renderTableView };
